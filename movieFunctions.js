@@ -26,10 +26,28 @@ module.exports = {
 
         const movie = await driver.findElement(By.xpath(`//button[contains(@id, ${movieTxt})]`))
 
-        await driver.findElement(By.xpath(`//button[contains(@id, ${movieTxt})]`)).click()
+        await driver.findElement(By.id("Spiderman")).click()
         
         const displayed = movie.isDisplayed()
 
-        expect(displayed).toBeFalsy()
+        expect(displayed).toBeTruthy()
     },
+
+    uncrossedOff: async (driver) => {
+        await driver.findElement(By.xpath('//input')).sendKeys('Spiderman')
+
+        await driver.findElement(By.xpath('//button')).click()
+
+        await driver.findElement(By.xpath('//span')).click()
+
+        const checkedClass = await driver.findElement(By.className("checked"))
+
+        checkedClass.click()
+        
+        const displayed = checkedClass.isDisplayed()
+
+        expect(displayed).toBeTruthy()
+
+    },
+
 }

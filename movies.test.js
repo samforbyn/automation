@@ -2,7 +2,8 @@ const {Builder, Capabilities, By} = require('selenium-webdriver')
 
 require('chromedriver')
 const {deletedMovie,
-       crossedOff
+       crossedOff,
+       uncrossedOff
     } = require("./movieFunctions")
 
 const driver = new Builder().withCapabilities(Capabilities.chrome()).build()
@@ -22,5 +23,10 @@ test("movie was deleted", async () => {
 
 test("movie crossed off", async () => {
     await crossedOff(driver)
+    await driver.sleep(3000)
+})
+
+test("movie uncrossed" , async () => {
+    await uncrossedOff(driver)
     await driver.sleep(3000)
 })
